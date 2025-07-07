@@ -26,7 +26,7 @@ let pokemonRepository = (function () {
     button.innerText = pokemon.name;
     button.classList.add("button");
     listItem.appendChild(button);
-    $('li').addClass('list-group-item')
+    $(listItem).addClass("list-group-item col-sm-4");
     element.appendChild(listItem);
 
     button.addEventListener("click", function () {
@@ -65,6 +65,7 @@ let pokemonRepository = (function () {
       .then(function (details) {
         item.imageUrlFront = details.sprites.front_default;
         item.imageUrlBack = details.sprites.back_default;
+        item.id = details.id;
         item.height = details.height;
         item.weight = details.weight;
         item.types = details.types.map((type) => type.type.name).join(", ");
@@ -93,16 +94,18 @@ let pokemonRepository = (function () {
     let imageElementBack = $('<img class="modal-img" style="width:50%">');
     imageElementBack.attr("src", pokemon.imageUrlBack);
 
+    let idElement = $("<p class='pokemon-id'>" + "#" + pokemon.id + "</p>");
     let heightElement = $("<p>" + "Height: " + pokemon.height + "</p>");
     let weightElement = $("<p>" + "Weight: " + pokemon.weight + "</p>");
-    let typesElement = $("<p>" + "Types: " + pokemon.types + "</p>");
+    let typesElement = $("<p class='pokemon-types'>" + "Type: " + pokemon.types + "</p>");
     let abilitiesElement = $(
-      "<p>" + "Abilities: " + pokemon.abilities + "</p>"
+      "<p class='pokemon-abilities'>" + "Abilities: " + pokemon.abilities + "</p>"
     );
 
     modalTitle.append(nameElement);
     modalBody.append(imageElementFront);
     modalBody.append(imageElementBack);
+    modalBody.append(idElement);
     modalBody.append(heightElement);
     modalBody.append(weightElement);
     modalBody.append(typesElement);
@@ -124,3 +127,21 @@ pokemonRepository.loadList().then(function () {
     pokemonRepository.addListItem(pokemon);
   });
 });
+
+document
+  .querySelector("#pokemon-search")
+  .addEventListener("input", function (e) {
+    let searchValue = e.target.value.toLowerCase();
+    let pokemonListItems = document.querySelectorAll(".pokemon-list li");
+
+    pokemonListItems.forEach((item) => {
+      let button = item.querySelector("button");
+      let name = button.innerText.toLowerCase();
+
+      if (name.includes(searchValue)) {
+        item.style.display = "";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  });
