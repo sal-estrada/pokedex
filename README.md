@@ -1,6 +1,6 @@
 # Pokédex 
 
-Web application project to search and view the first 151 Pokémon (Generation 1). 
+Web application project with a retro aesthetic to search and view the first 151 Pokémon (Generation 1). 
 
 ## Description
 
