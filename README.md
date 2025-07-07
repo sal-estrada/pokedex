@@ -4,7 +4,7 @@ Web application project to search and view the first 151 Pokémon (Generation 1)
 
 ## Description
 
-This project allows the user to search for different pokemon according to different criteria, such as type, size, and color. It incorporates a chatbot which the client can inquire regarding different Generataion 1 Pokémon.
+This project allows the user to search for different pokemon according to different criteria, such as type, size, and color. It will incorporate a chatbot which the client can inquire regarding different Generataion 1 Pokémon.
 
 ### Key Features
 <ul>
